@@ -1,14 +1,18 @@
 ﻿using System.ComponentModel.Design;
+using System.Data;
 
 namespace Maori_Quiz
+
 {
     internal class Program
     {
         static int score = 0;
         static int level = 0;
+        static string name;
+        static char playAgain;
+        static bool loop = true;
         static void Main(string[] args)
         {
-            string name;
             Console.WriteLine("Welcome to Mark's Maori Quiz");
             //adding a delay between the text
             Thread.Sleep(1000);
@@ -18,151 +22,104 @@ namespace Maori_Quiz
             //adding a delay between the text
             Thread.Sleep(1000);
             //will repeat until the user inputs 1,2 or 3
-            while (level != 1 && level != 2 && level != 3)
+            while(loop == true)
             {
-                Console.WriteLine($"Hi {name}, please enter what level you would like to play\n1. Easy\n2. Medium\n3. Hard");
-                level = Convert.ToInt32(Console.ReadLine());
-            }
-            if(level == 1)
-            {
-                Level1();
-            }
-            else if(level == 2)
-            {
-
-            }
-            else if (level == 3)
-            {
-
-            }
-
-            //level 1 method
-            static void Level1()
-            {
-                // 
-                string q1, q2, q3, q4, q5, q6, q7, q8, q9, q10;
-                string a1 = "kia ora";
-                string a2 = "moana";
-                string a3 = "come here";
-                string a4 = "kai";
-                string a5 = "work";
-                string a6 = "tamariki";
-                string a7 = "family";
-                string a8 = "mornea";
-                string a9 = "yellow";
-                string a10 = "blue";
-                
-                // QUESTION 1
-
-                Console.WriteLine("Question 1: How do you say \"hello\"\na. ka kite\nb. noho iho\nc. kia ora");
-                q1 = Console.ReadLine().ToLower();
-                if(q1 == "c")
+                while (level != 1 && level != 2 && level != 3)
                 {
-                    Console.WriteLine("Good job you got it right!");
-                    score += 1;
+                    score = 0;
+                    level = 0;
+                    Console.WriteLine($"Hi {name}, please enter what level you would like to play\n1. Easy\n2. Medium\n3. Hard");
+                    level = Convert.ToInt32(Console.ReadLine());
                 }
-                else
+                if (level == 1)
                 {
-                    Console.WriteLine("Try again");
-                    q1 = Console.ReadLine();
-                    if(q1 == "c")
+                    levelEasy();
+                }
+                else if (level == 2)
+                {
+
+                }
+                else if (level == 3)
+                {
+
+                }
+
+                //level 1 method
+                static void levelEasy()
+                {
+                    // 
+                    string[] question = {
+                    "How do you say \"hello\"\na. ka kite\nb. noho iho\nc. kia ora",
+                    "How do you say \"ocean\"\na. maoana\nb. awa\nc. katao ",
+                    "What does \"haere mai\" mean\na. congratulations\nb. go away\nc. come here",
+                    "How do you say \"food\"\na. waka\nb. ika\nc. kai",
+                    "What does \"mahi\" mean\na. weclome\nb. work\nc. visitors",
+                    "How do you say \"children\"\na. tamariki\nb. tamahine\nc. toanga",
+                    "What does \"whanau\" mean\na. parents\nb. hill\nc. family",
+                    "How do you say \"good morning\"\na. tena koutou\nb. morena\nc. haere ra",
+                    "What colour is Kowhai\na. blue\nb. red\nc. yellow",
+                    "What colour is Kikorangi\na. red\nb. blue\nc. orange"};
+
+                    string[] answer = { "kia ora", "moana", "come here", "kai", "work", "tamariki", "family", "mornea", "yellow", "blue" };
+                    string[] charAnswer = { "c", "a", "c", "c", "b", "a", "c", "b", "c", "b" };
+                    string userInput;
+
+                    //clearing the console, prompting the user what level they selected and adding delays between the messages
+                    Console.Clear();
+                    Console.WriteLine("You selected the easy level!");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("Get ready!");
+                    Thread.Sleep(1000);
+                    for (int i = 0; i < 10; i++)
                     {
-                        Console.WriteLine("You got it on you're second try. You don't get any points though.");
+                        Console.WriteLine($"Question {i + 1}:" + question[i]);
+                        //getting input from the user
+                        userInput = Console.ReadLine().ToLower();
+                        //checking if the user has answered correctly 
+                        if (userInput == charAnswer[i])
+                        {
+                            Console.WriteLine("Good job you got it right!");
+                            score += 1;
+                        }
+                        else
+                        {
+                            //giving the user a second chance 
+                            Console.WriteLine("Try again");
+                            userInput = Console.ReadLine();
+                            if (userInput == charAnswer[i])
+                            {
+                                Console.WriteLine("You got it on you're second try. You don't get any points though.");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Unlucky, the correct answer was " + answer[i]);
+                            }
+                        }
+                        Thread.Sleep(2000);
+                        Console.Clear();
+                    }
+                    if (score <= 3)
+                    {
+                        Console.WriteLine($"Hard luck your score is {score}, would you like to play again?(y / n)");
+                    }
+                    else if (score <= 6)
+                    {
+                        Console.WriteLine($"Not to bad your score is {score}, would you like to play again?(y / n)");
                     }
                     else
                     {
-                        Console.WriteLine("Unlucky, the correct answer was " + a1);
+                        Console.WriteLine($"Great job! Your score is {score} would you like to play again?(y / n)");
                     }
-                }
-                // QUESTION 2
-
-                Console.WriteLine("Question 2: How do you say \"Ocean\"\na. maoana\nb. awa\nc. katao");
-                q2 = Console.ReadLine().ToLower();
-                if (q2 == "a")
-                {
-                    Console.WriteLine("Good job you got it right!");
-                    score += 1;
-                }
-                else
-                {
-                    Console.WriteLine("Try again");
-                    q2 = Console.ReadLine();
-                    if (q2 == "a")
+                    playAgain = Convert.ToChar(Console.ReadLine().ToLower());
+                    if (playAgain == 'n')
                     {
-                        Console.WriteLine("You got it on you're second try. You don't get any points though.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unlucky, the correct answer was " + a2);
+                        Console.WriteLine("Thanks for playing!");
+                        loop = false; 
                     }
                 }
-                // QUESTION 3
-                Console.WriteLine("Question 3: What does \"haere mai\" mean\na. congratulations\nb. go away\nc. come here");
-                q3 = Console.ReadLine().ToLower();
-                if (q3 == "c")
-                {
-                    Console.WriteLine("Good job you got it right!");
-                    score += 1;
-                }
-                else
-                {
-                    Console.WriteLine("Try again");
-                    q3 = Console.ReadLine();
-                    if (q3 == "c")
-                    {
-                        Console.WriteLine("You got it on you're second try. You don't get any points though.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unlucky, the correct answer was " + a3);
-                    }
-                }
-                // QUESTION 4 
-
-                Console.WriteLine("Question 2: How do you say \"Food\"\na. waka\nb. ika\nc. kai");
-                q4 = Console.ReadLine().ToLower();
-                if (q4 == "c")
-                {
-                    Console.WriteLine("Good job you got it right!");
-                    score += 1;
-                }
-                else
-                {
-                    Console.WriteLine("Try again");
-                    q4 = Console.ReadLine();
-                    if (q4 == "c")
-                    {
-                        Console.WriteLine("You got it on you're second try. You don't get any points though.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unlucky, the correct answer was " + a4);
-                    }
-                }
-                //QUESTION 5
-
-                Console.WriteLine("Question 5: What does \"mahi\" mean\na. weclome\nb. work\nc. visitors");
-                q5 = Console.ReadLine().ToLower();
-                if (q5 == "b")
-                {
-                    Console.WriteLine("Good job you got it right!");
-                    score += 1;
-                }
-                else
-                {
-                    Console.WriteLine("Try again");
-                    q5 = Console.ReadLine();
-                    if (q5 == "c")
-                    {
-                        Console.WriteLine("You got it on you're second try. You don't get any points though.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Unlucky, the correct answer was " + a5);
-                    }
-                }
+            
             }
         }
-
     }
 }
+
