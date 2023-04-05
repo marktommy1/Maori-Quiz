@@ -1,6 +1,4 @@
-﻿using System.Net.Sockets;
-
-namespace Maori_Quiz
+﻿namespace Maori_Quiz
 {
     internal class Program
     {
@@ -29,7 +27,7 @@ namespace Maori_Quiz
                     Console.WriteLine("Your name is too short\nPlease enter your name:");
                     name = Console.ReadLine();
                 }
-                else if (name.Length > MAX_CHAR)
+                else if (name.Length >= MAX_CHAR)
                 {
                     Console.WriteLine("Your name is too long\nPlease enter your name:");
                     name = Console.ReadLine();
@@ -97,12 +95,12 @@ namespace Maori_Quiz
                 Console.WriteLine("\nGet ready!\n");
                 Thread.Sleep(1000);
                 //two for loops to get the questions from the 2D array
-                for (int i = 0; i < level; i++)
+                for (int i = level - 1; i < level; i++)
                 {
                     for (int j = 0; j < questionAnswers.GetLength(1); j++)
-                    {   
+                    {
                         //asks the questions 
-                        Console.WriteLine($"Question {j + 1}: " + questionAnswers[i, j]);
+                        Console.WriteLine($"Question {j + 1}: " + questionAnswers[i , j]);
                         //input from the user 
                         user_input = Console.ReadLine().ToLower(); 
                         //making sure the user enters valid level
@@ -115,8 +113,8 @@ namespace Maori_Quiz
                         if (user_input.Equals(questionAnswers[level + 5, j]))
                         {
                             score += 1;
-                            Console.WriteLine($"Good job {name} you got it right!\n\nYou're current score is: {score}/{j+1}");
-                            Thread.Sleep(1500);
+                            Console.WriteLine($"Good job {name} you got it right!\n\nYour current score is: {score}/{j+1}");
+                            Thread.Sleep(2000);
                             Console.Clear();
                         }
                         else
