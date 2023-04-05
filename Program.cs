@@ -65,7 +65,7 @@ namespace Maori_Quiz
                 //resets the users score and level
                 score = 0;
                 level = 0;
-                Console.WriteLine($"\nHi {name}, please enter what level you would like to play\n1. Easy\n2. Medium\n3. Hard");
+                Console.WriteLine($"\nHi {name}, please enter what level you would like to play\n\n1. Easy\n2. Medium\n3. Hard");
                 //making sure the user enters a valid level
                 while (level != 1 && level != 2 && level != 3)
                 {
@@ -115,7 +115,7 @@ namespace Maori_Quiz
                         if (user_input.Equals(questionAnswers[level + 5, j]))
                         {
                             score += 1;
-                            Console.WriteLine($"Good job {name} you got it right!\nYou're current score is: {score}/{j+1}");
+                            Console.WriteLine($"Good job {name} you got it right!\n\nYou're current score is: {score}/{j+1}");
                             Thread.Sleep(1500);
                             Console.Clear();
                         }
@@ -133,7 +133,7 @@ namespace Maori_Quiz
                             //got it correct on second try
                             if (user_input.Equals(questionAnswers[level + 5, j]))
                             {
-                                Console.WriteLine($"You got it on your second try. You don't get any points though.\nYour current score is: {score}/{j+1}");
+                                Console.WriteLine($"You got it on your second try. You don't get any points though.\n\nYour current score is: {score}/{j+1}");
                                 Thread.Sleep(2000);
                                 Console.Clear();
                             }
@@ -161,7 +161,7 @@ namespace Maori_Quiz
                     Console.WriteLine($"Great job {name}! Your score is {score}/10");
                 }   
                 //asking the user if they want to play again
-                Console.WriteLine("Would you like to play again?(y / n)");
+                Console.WriteLine("\nWould you like to play again?(y / n)");
                 play_again = Console.ReadLine().ToLower();
                 //making sure the user enters valid input       
                 while (!play_again.Equals("y") && !play_again.Equals("n"))
