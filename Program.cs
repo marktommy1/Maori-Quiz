@@ -1,4 +1,6 @@
-﻿namespace Maori_Quiz
+﻿using System.ComponentModel.Design;
+
+namespace Maori_Quiz
 {
     internal class Program
     {
@@ -39,13 +41,23 @@
                 }
                 else
                 {
-                    break;
+                    validate_name = false;
                 }
             }
             //adding a delay between the text
             Thread.Sleep(1000);
             return name;
             //end of getname method
+        }
+        static string validateuseranswer(string user_input)
+        {
+            while(!user_input.Equals("a") && !user_input.Equals("b") && !user_input.Equals("c"))
+            {
+                Console.WriteLine("Please enter a valid answer");
+                user_input = Console.ReadLine().ToLower();
+                
+            }
+            return user_input;
         }
         static void play(string name)
         {
@@ -101,17 +113,13 @@
                 for (int i = level - 1; i < level; i++)
                 {
                     for (int j = 0; j < questionAnswers.GetLength(1); j++)
-                    
+                    { 
                         //asks the questions 
                         Console.WriteLine($"Question {j + 1}: " + questionAnswers[i, j]);
                         //input from the user 
                         user_input = Console.ReadLine().ToLower();
                         //making sure the user enters valid level
-                        while (!user_input.Equals("a") && !user_input.Equals("b") && !user_input.Equals("c"))
-                        {
-                            Console.WriteLine("Please enter a valid answer");
-                            user_input = Console.ReadLine().ToLower();
-                        }
+                        user_input = validateuseranswer(user_input);
                         //got the answer correct
                         if (user_input.Equals(questionAnswers[level + 5, j]))
                         {
@@ -126,11 +134,7 @@
                             Console.WriteLine("Try again");
                             user_input = Console.ReadLine().ToLower();
                             //making sure the user enters valid input
-                            while (!user_input.Equals("a") && !user_input.Equals("b") && !user_input.Equals("c"))
-                            {
-                                Console.WriteLine("Please enter a valid answer");
-                                user_input = Console.ReadLine().ToLower();
-                            }
+                            user_input = validateuseranswer(user_input);
                             //got it correct on second try
                             if (user_input.Equals(questionAnswers[level + 5, j]))
                             {
@@ -179,4 +183,5 @@
         }//end of play method
     }
 }
+
 
