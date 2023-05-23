@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.Design;
-
-namespace Maori_Quiz
+﻿namespace Maori_Quiz
 {
     internal class Program
     {
@@ -14,12 +12,13 @@ namespace Maori_Quiz
             const int MAX_CHAR = 30;
             string name;
             bool validate_name = true;
+            Console.ForegroundColor = ConsoleColor.Blue;
             //prompting the user
             Console.WriteLine("Welcome to Mark's Maori Quiz\n");
             //adding a delay between the text
             Thread.Sleep(1000);
             //prompting the user for their name
-            Console.WriteLine("Please enter your name: ");
+            Console.WriteLine("Please enter your name: \n");
             name = Console.ReadLine();
             //making sure the user enters a valid name 
             while (validate_name == true)
@@ -44,20 +43,26 @@ namespace Maori_Quiz
                     validate_name = false;
                 }
             }
-            //adding a delay between the text
-            Thread.Sleep(1000);
             return name;
             //end of getname method
         }
-        static string validateuseranswer(string user_input)
+        static string validateuserinput(string user_input)
         {
-            while(!user_input.Equals("a") && !user_input.Equals("b") && !user_input.Equals("c"))
+            while (!user_input.Equals("a") && !user_input.Equals("b") && !user_input.Equals("c"))
             {
                 Console.WriteLine("Please enter a valid answer");
                 user_input = Console.ReadLine().ToLower();
-                
+
             }
             return user_input;
+        }
+        static int showscore(int score, int j)
+        {
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine($"\nYour current score is: {score}/{j + 1}\n\nPress any key to continue: ");
+            Console.ReadKey();
+            Console.Clear();
+            return score;
         }
         static void play(string name)
         {
@@ -76,7 +81,7 @@ namespace Maori_Quiz
                 //resets the users score and level
                 score = 0;
                 level = 0;
-                Console.WriteLine($"\nHi {name}, please enter what level you would like to play\n\n1. Easy\n2. Medium\n3. Hard");
+                Console.WriteLine($"\nHi {name}, please enter what level you would like to play\n\n1. Easy\n2. Medium\n3. Hard\n");
                 //making sure the user enters a valid level
                 while (level != 1 && level != 2 && level != 3)
                 {
@@ -87,8 +92,8 @@ namespace Maori_Quiz
                     //catching the input
                     catch (FormatException)
                     {
-                        Console.WriteLine("Please enter a valid level: ");
                     }
+                    Console.WriteLine("Please enter a valid level: ");
                 }
                 //clearing the console
                 Console.Clear();
@@ -98,7 +103,7 @@ namespace Maori_Quiz
                 }
                 else if (level == 2)
                 {
-                    Console.WriteLine("You selected the intermediate level!");
+                    Console.WriteLine("You selected the medium level!");
                 }
                 else if (level == 3)
                 {
@@ -113,41 +118,42 @@ namespace Maori_Quiz
                 for (int i = level - 1; i < level; i++)
                 {
                     for (int j = 0; j < questionAnswers.GetLength(1); j++)
-                    { 
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                         //asks the questions 
-                        Console.WriteLine($"Question {j + 1}: " + questionAnswers[i, j]);
+                        Console.WriteLine($"Question {j + 1}: " + questionAnswers[i, j] + "\n");
                         //input from the user 
                         user_input = Console.ReadLine().ToLower();
                         //making sure the user enters valid level
-                        user_input = validateuseranswer(user_input);
+                        user_input = validateuserinput(user_input);
                         //got the answer correct
                         if (user_input.Equals(questionAnswers[level + 5, j]))
                         {
                             score += 1;
-                            Console.WriteLine($"Good job {name} you got it right!\n\nYour current score is: {score}/{j + 1}");
-                            Thread.Sleep(2000);
-                            Console.Clear();
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.WriteLine($"Good job {name} you got it right!");
+                            showscore(score, j);
                         }
                         else
                         {
                             //giving the user a second chance 
-                            Console.WriteLine("Try again");
+                            Console.WriteLine("Try again\n");
                             user_input = Console.ReadLine().ToLower();
                             //making sure the user enters valid input
-                            user_input = validateuseranswer(user_input);
+                            user_input = validateuserinput(user_input);
                             //got it correct on second try
                             if (user_input.Equals(questionAnswers[level + 5, j]))
                             {
-                                Console.WriteLine($"You got it on your second try. You don't get any points though.\n\nYour current score is: {score}/{j + 1}");
-                                Thread.Sleep(2000);
-                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                Console.WriteLine($"You got it on your second try. You don't get any points though.");
+                                showscore(score, j);
                             }
                             //got the answer incorrect
                             else
                             {
-                                Console.WriteLine($"Unlucky, the correct answer was {questionAnswers[level + 2, j]}\nYour current score is: {score}/{j + 1}");
-                                Thread.Sleep(2300);
-                                Console.Clear();
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine($"Unlucky, the correct answer was {questionAnswers[level + 2, j]}");
+                                showscore(score, j);
                             }
                         }
                     }
@@ -183,5 +189,3 @@ namespace Maori_Quiz
         }//end of play method
     }
 }
-
-
