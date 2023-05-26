@@ -92,8 +92,8 @@
                     //catching the input
                     catch (FormatException)
                     {
-                    }
-                    Console.WriteLine("Please enter a valid level: ");
+                        Console.WriteLine("Please enter a valid level: ");
+                    }  
                 }
                 //clearing the console
                 Console.Clear();
