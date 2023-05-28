@@ -2,6 +2,14 @@ This project was fully developed by myself, Mark Tommy. This was made as a part 
 
 This is a multi choice quiz that is a console application made using C#. The quiz is meant to help people learn Te Reo Maori.
 
+FEATURES 
+
+Three different levels
+Has colours
+Three choices for the user to choose
+Automatic marking 
+Results 
+
 INSTALLATION
 
 Download and launch Visual Studio 2022. 
