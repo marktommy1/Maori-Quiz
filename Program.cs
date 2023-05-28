@@ -69,8 +69,7 @@
             //declaring variables 
             int score = 0;
             int level = 0;
-            string user_input;
-            string play_again;
+            string user_input, play_again;
             bool loop = true;
             //2D array that holds all the questions and answers 
             //the 2d array hold the questions for the levels then the answers in words, then the answers in characters. There are all in the order of easy medium hard 
@@ -92,8 +91,8 @@
                     //catching the input
                     catch (FormatException)
                     {
-                        Console.WriteLine("Please enter a valid level: ");
-                    }  
+                    }
+                    Console.WriteLine("Please enter a valid level: ");
                 }
                 //clearing the console
                 Console.Clear();
